@@ -1,7 +1,13 @@
+// @ts-ignore
 import validator from "validator";
 import i18next from "../translations/i18n";
 
-function validateEmailAddress(value) {
+interface ValidationResult {
+  isValid: boolean;
+  errorText: string | "";
+}
+
+function validateEmailAddress(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result = validator.isEmail(trimmedString);
   if (!value) {
@@ -13,7 +19,7 @@ function validateEmailAddress(value) {
   };
 }
 
-function validateRequired(value) {
+function validateRequired(value: any): ValidationResult {
   let result = !validator.isEmpty(value || "");
   return {
     isValid: result,
@@ -21,7 +27,7 @@ function validateRequired(value) {
   };
 }
 
-function validateContainsFiveCharacters(value) {
+function validateContainsFiveCharacters(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result = trimmedString.length >= 5;
   if (!value) {
@@ -33,7 +39,7 @@ function validateContainsFiveCharacters(value) {
   };
 }
 
-function validateContainsANumber(value) {
+function validateContainsANumber(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result = /\d/.test(trimmedString);
   if (!value) {
@@ -45,7 +51,7 @@ function validateContainsANumber(value) {
   };
 }
 
-function validateIsIban(value) {
+function validateIsIban(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result = validator.isIBAN(trimmedString);
   if (!value) {
@@ -57,7 +63,7 @@ function validateIsIban(value) {
   };
 }
 
-function validateIsInteger(value) {
+function validateIsInteger(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result = validator.isInt(trimmedString);
   if (!value) {
@@ -69,7 +75,7 @@ function validateIsInteger(value) {
   };
 }
 
-function validateIsFloat(value) {
+function validateIsFloat(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   trimmedString = trimmedString.replace(",", ".");
   let result = validator.isFloat(trimmedString);
@@ -82,7 +88,7 @@ function validateIsFloat(value) {
   };
 }
 
-function validateIsPositive(value) {
+function validateIsPositive(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result = parseFloat(trimmedString) > 0;
   if (!value) {
@@ -94,7 +100,7 @@ function validateIsPositive(value) {
   };
 }
 
-function validateIsNotNegative(value) {
+function validateIsNotNegative(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result = parseFloat(trimmedString) >= 0;
   if (!value) {
@@ -106,7 +112,7 @@ function validateIsNotNegative(value) {
   };
 }
 
-function validateSwiftCode(value) {
+function validateSwiftCode(value: any): ValidationResult {
   let swiftRegex = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/;
   let trimmedString = (value || "").trim();
   let result = swiftRegex.test(trimmedString);
@@ -119,7 +125,7 @@ function validateSwiftCode(value) {
   };
 }
 
-function validateIsPhoneNumber(value) {
+function validateIsPhoneNumber(value: any): ValidationResult {
   let trimmedString = (value || "").trim();
   let result =
     trimmedString.length === 9 &&

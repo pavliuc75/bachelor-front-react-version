@@ -1,4 +1,4 @@
-function getRandomString(length) {
+function getRandomString(length: number): string {
   if (length < 0) throw new Error("length must be >= 0");
 
   let result = "";

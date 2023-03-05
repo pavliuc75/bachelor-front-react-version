@@ -1,4 +1,4 @@
-function downloadFile(name, content, mimeType) {
+function downloadFile(name: string, content: BlobPart, mimeType: any) {
   let a = document.createElement("a");
   let blob = new Blob([content], { type: mimeType });
   a.href = window.URL.createObjectURL(blob);

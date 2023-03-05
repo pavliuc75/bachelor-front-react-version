@@ -6,6 +6,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import "./translations/i18n";
 import { BrowserRouter } from "react-router-dom";
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 library.add(fas);
 
@@ -16,7 +18,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
