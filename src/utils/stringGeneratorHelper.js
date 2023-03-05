@@ -1,6 +1,5 @@
 function getRandomString(length) {
-  if (length < 0)
-    throw new Error("length must be >= 0");
+  if (length < 0) throw new Error("length must be >= 0");
 
   let result = "";
   const characters =

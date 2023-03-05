@@ -1,30 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { Outlet, Route, Routes } from "react-router-dom";
+import Base from "./pages/Base";
+import Account from "./pages/Account";
+import CreateAccount from "./pages/CreateAccount";
+import PageNotFound from "./pages/PageNotFound";
+import NavigationBar from "./components/navigation-bar/NavigationBar";
 
 function App() {
-    const { t, i18n } = useTranslation();
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline text-dark-blue">
-          {t('createAnAccount')} {process.env.REACT_APP_URL}
-      </h1>
-        <FontAwesomeIcon icon={["fas", "coffee"]} />
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Base />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    </Routes>
+  );
+}
+
+function Layout() {
+  return (
+    <div className="flex flex-col min-h-[100vh] max-w-full relative">
+      <NavigationBar />
+      <Outlet />
     </div>
   );
 }

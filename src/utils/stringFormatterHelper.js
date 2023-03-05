@@ -11,9 +11,14 @@ function getFormattedPrice(price) {
 }
 
 function underscoreToCamelCase(str) {
-  return str.replace(/_([a-z])/g, function(g) {
+  return str.replace(/_([a-z])/g, function (g) {
     return g[1].toUpperCase();
   });
 }
 
-export const stringFormatterHelper = { replaceDotsWithCommas, replaceCommasWithDots, getFormattedPrice, underscoreToCamelCase };
+export const stringFormatterHelper = {
+  replaceDotsWithCommas,
+  replaceCommasWithDots,
+  getFormattedPrice,
+  underscoreToCamelCase,
+};

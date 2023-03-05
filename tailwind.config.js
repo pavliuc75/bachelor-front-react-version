@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -17,11 +15,16 @@ module.exports = {
         // background: "rgba(92,122,216,0.33)",
         background: "rgba(93, 160, 215, 0.33)",
         cinder: "var(--cinder)",
-        error: "var(--error)"
-      }, lineHeight: {
-        171: "1.71", 157: "1.57", 150: "1.5", 145: "1.45", 133: "1.33"
-      }
+        error: "var(--error)",
+      },
+      lineHeight: {
+        171: "1.71",
+        157: "1.57",
+        150: "1.5",
+        145: "1.45",
+        133: "1.33",
+      },
     },
   },
   plugins: [],
-}
+};
