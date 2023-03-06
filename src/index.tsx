@@ -8,21 +8,20 @@ import "./translations/i18n";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./store";
 import { Provider } from "react-redux";
+import keycloak from "./authentication/keycloak";
 
 library.add(fas);
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+keycloak.init({ checkLoginIframe: false, onLoad: "check-sso" }).then(() => {
+  const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
-);
-
-//todo: add body css
+  root.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+});
