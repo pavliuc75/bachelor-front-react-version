@@ -1,0 +1,8 @@
+.MuiBackdrop-root {
+    background-color: var(--background) !important;
+}
+
+.MuiPaper-elevation {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}

@@ -42,14 +42,9 @@ function CTextarea(props: Props, ref: any) {
 
   const textareaId = useRef(`textarea-${stringGeneratorHelper.getRandomString(5)}`);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [valueLocal, setValueLocal] = useState(value || "");
   const [errorTextLocal, setErrorTextLocal] = useState(errorText);
 
-  useImperativeHandle(ref, () => ({ forceFocus }));
-
-  useEffect(() => {
-    setValueLocal(value || "");
-  }, [value]);
+  useImperativeHandle(ref, () => ({ forceFocus, validateInput }));
 
   useEffect(() => {
     setErrorTextLocal(errorText);
@@ -73,8 +68,9 @@ function CTextarea(props: Props, ref: any) {
   }
 
   function validateInput() {
+    //todo fix this
     for (const validatorFunction of validatorFunctions) {
-      let result = validatorFunction(valueLocal);
+      let result = validatorFunction(value || "");
       if (!result.isValid) {
         setErrorTextLocal(result.errorText);
         break;
@@ -105,7 +101,7 @@ function CTextarea(props: Props, ref: any) {
       <div className="flex flex-none">
         <textarea
           {...textareaProps}
-          value={valueLocal}
+          value={value || ""}
           disabled={isDisabled}
           ref={textareaRef}
           rows={rows}
