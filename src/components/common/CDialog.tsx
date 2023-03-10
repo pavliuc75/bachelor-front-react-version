@@ -1,14 +1,17 @@
 import { useTranslation } from "react-i18next";
 import Dialog from "@mui/material/Dialog";
 import "../../styles/CDialog.css";
+import { Breakpoint } from "@mui/material";
+import CButtonSecondary from "./CButtonSecondary";
+import CButtonPrimary from "./CButtonPrimary";
 
 interface Props {
   isShown: boolean;
   titleText?: string;
   subtitleText?: string;
-  width?: number;
-  contentClassOverwrite?: string;
-  onUpdate: (value: boolean) => void;
+  width?: Breakpoint;
+  onUpdate?: (value: boolean) => void;
+  onConfirm?: () => void;
   titleSlot?: any;
   subtitleSlot?: any;
   footerSlot?: any;
@@ -21,9 +24,9 @@ function CDialog(props: Props) {
     isShown,
     titleText,
     subtitleText,
-    width = 600,
-    contentClassOverwrite = "border border-mid-gray border-solid bg-white pa-8 focus-visible:outline-none flex flex-col",
+    width = "sm",
     onUpdate,
+    onConfirm,
     titleSlot,
     subtitleSlot,
     footerSlot,
@@ -31,8 +34,16 @@ function CDialog(props: Props) {
   } = props;
 
   return (
-    <Dialog open={isShown} onClose={() => onUpdate(false)}>
-      aaa
+    <Dialog maxWidth={width} open={isShown} onClose={() => (onUpdate ? onUpdate(false) : {})}>
+      {titleSlot || <span className="text-bold">{titleText}</span>}
+      {subtitleSlot || (subtitleText && <span className="mt-3 c-text-14 text-mid-gray">{subtitleText}</span>)}
+      {children}
+      {footerSlot || (
+        <div className="mt-3 flex items-center justify-end gap-x-6">
+          <CButtonSecondary onClick={() => (onUpdate ? onUpdate(false) : {})} text={t("cancel")}></CButtonSecondary>
+          <CButtonPrimary onClick={onConfirm} text={t("confirm")}></CButtonPrimary>
+        </div>
+      )}
     </Dialog>
   );
 }
