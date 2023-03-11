@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import { validatorHelper } from "../utils/validatorHelper";
 import CComment from "../components/common/CComment";
 import CDialog from "../components/common/CDialog";
+import CFileInput from "../components/common/CFileInput";
 
 function Base() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function Base() {
       <CComment authorSlot={() => <div>kek</div>}></CComment>
       <CDialog onUpdate={setIsDialogShown} isShown={isDialogShown}></CDialog>
       <button onClick={() => setIsDialogShown(true)}>ds</button>
+      <CFileInput></CFileInput>
     </div>
   );
 }
