@@ -6,6 +6,7 @@ import CreateAccount from "./pages/CreateAccount";
 import PageNotFound from "./pages/PageNotFound";
 import NavigationBar from "./components/navigation-bar/NavigationBar";
 import keycloak from "./authentication/keycloak";
+import CLoadingOverlay from "./components/common/CLoadingOverlay";
 
 function App() {
   return (
@@ -29,10 +30,11 @@ function App() {
 
 function Layout() {
   return (
-    <div className="flex flex-col min-h-[100vh] max-w-full relative">
+    <main className="flex flex-col min-h-[100vh] max-w-full relative">
+      <CLoadingOverlay></CLoadingOverlay>
       <NavigationBar />
       <Outlet />
-    </div>
+    </main>
   );
 }
 

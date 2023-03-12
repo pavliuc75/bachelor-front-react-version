@@ -35,13 +35,7 @@ export const eventSlice = createSlice({
     hideSnackbar: (state) => {
       state.snackbar.isShown = false;
     },
-    showLoadingOverlay: (
-      state,
-      action: PayloadAction<{ isInstant: boolean }> = {
-        payload: { isInstant: false },
-        type: "event/showLoadingOverlay",
-      }
-    ) => {
+    showLoadingOverlay: (state, action: PayloadAction<{ isInstant: boolean }>) => {
       state.loadingOverlay = { ...action.payload, isShown: true };
     },
     hideLoadingOverlay: (state) => {

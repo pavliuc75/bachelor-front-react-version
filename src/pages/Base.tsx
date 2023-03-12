@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store";
-import { showSnackbar } from "../store/eventSlice";
+import { showLoadingOverlay, showSnackbar } from "../store/eventSlice";
 import CButtonPrimary from "../components/common/CButtonPrimary";
 import CButtonSecondary from "../components/common/CButtonSecondary";
 import CTextarea from "../components/common/CTextarea";
@@ -9,6 +9,9 @@ import { validatorHelper } from "../utils/validatorHelper";
 import CComment from "../components/common/CComment";
 import CDialog from "../components/common/CDialog";
 import CFileInput from "../components/common/CFileInput";
+import CInput from "../components/common/CInput";
+import CMenu from "../components/common/CMenu";
+import CLoadingOverlay from "../components/common/CLoadingOverlay";
 
 function Base() {
   const dispatch = useDispatch();
@@ -18,9 +21,19 @@ function Base() {
   const cTextareaRef = useRef<any>(null);
 
   const [isDialogShown, setIsDialogShown] = useState<boolean>(false);
+  const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
 
   function kek() {
     console.log(cTextareaRef.current?.validateInput());
+  }
+
+  function handleShowOverlay() {
+    dispatch(showLoadingOverlay({ isInstant: true }));
+  }
+
+  function handleShowMenu(e: { currentTarget: any }) {
+    console.log(e.currentTarget);
+    setIsMenuShown(true);
   }
 
   return (
@@ -34,9 +47,8 @@ function Base() {
       {text}
       <CTextarea
         ref={cTextareaRef}
-        lazyValidation={true}
         value={text}
-        validatorFunctions={[validatorHelper.validateEmailAddress]}
+        validatorFunctions={[validatorHelper.validateRequired]}
         onUpdate={(newStr) => setText(newStr)}
         labelText={"aaa"}></CTextarea>
       {/*<Child slot1={(items: any) => <div>aaa {items.name}</div>} slot2={<div>bbb</div>}></Child>*/}
@@ -44,6 +56,15 @@ function Base() {
       <CDialog onUpdate={setIsDialogShown} isShown={isDialogShown}></CDialog>
       <button onClick={() => setIsDialogShown(true)}>ds</button>
       <CFileInput></CFileInput>
+      <CInput
+        onUpdate={function (value: string): void {
+          throw new Error("Function not implemented.");
+        }}></CInput>
+      <button onClick={handleShowOverlay}>show overlay</button>
+      <button onClick={handleShowMenu}>show menu</button>
+      <CMenu items={[{ name: "a" }]}>
+        <div>a</div>
+      </CMenu>
     </div>
   );
 }

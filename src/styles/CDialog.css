@@ -1,4 +1,4 @@
-.MuiBackdrop-root {
+.MuiDialog-root .MuiBackdrop-root {
     background-color: var(--background) !important;
 }
 
