@@ -12,6 +12,9 @@ import CFileInput from "../components/common/CFileInput";
 import CInput from "../components/common/CInput";
 import CMenu from "../components/common/CMenu";
 import CLoadingOverlay from "../components/common/CLoadingOverlay";
+import CPagination from "../components/common/CPagination";
+import CRating from "../components/common/CRating";
+import CRatingEdit from "../components/common/CRatingEdit";
 
 function Base() {
   const dispatch = useDispatch();
@@ -65,6 +68,9 @@ function Base() {
       <CMenu items={[{ name: "a" }]}>
         <div>a</div>
       </CMenu>
+      <CPagination onCurrentPageChanged={() => {}} currentPage={3} totalPages={10}></CPagination>
+      <CRating value={3.5} totalRatings={5} isTotalRatingShown={true}></CRating>
+      <CRatingEdit value={3}></CRatingEdit>
     </div>
   );
 }

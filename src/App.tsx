@@ -7,6 +7,7 @@ import PageNotFound from "./pages/PageNotFound";
 import NavigationBar from "./components/navigation-bar/NavigationBar";
 import keycloak from "./authentication/keycloak";
 import CLoadingOverlay from "./components/common/CLoadingOverlay";
+import CSnackbar from "./components/common/CSnackbar";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function Layout() {
   return (
     <main className="flex flex-col min-h-[100vh] max-w-full relative">
       <CLoadingOverlay></CLoadingOverlay>
+      <CSnackbar></CSnackbar>
       <NavigationBar />
       <Outlet />
     </main>
