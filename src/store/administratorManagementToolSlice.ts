@@ -442,10 +442,12 @@ export const closeSupportThread =
     return api.privateApi
       .closeSupportThread(closeSupportThreadRequest)
       .catch((error) => {
-        showSnackbar({
-          message: i18n.t("failedToCloseSupportThread"),
-          type: "error",
-        });
+        dispatch(
+          showSnackbar({
+            message: i18n.t("failedToCloseSupportThread"),
+            type: "error",
+          })
+        );
         throw {};
       })
       .finally(() => dispatch(hideLoadingOverlay()));
