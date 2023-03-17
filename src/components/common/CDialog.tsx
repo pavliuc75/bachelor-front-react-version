@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Dialog from "@mui/material/Dialog";
-import "../../styles/CDialog.css";
+import "../../assets/styles/CDialog.css";
 import { Breakpoint } from "@mui/material";
 import CButtonSecondary from "./CButtonSecondary";
 import CButtonPrimary from "./CButtonPrimary";

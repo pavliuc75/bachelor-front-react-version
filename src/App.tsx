@@ -8,6 +8,8 @@ import NavigationBar from "./components/navigation-bar/NavigationBar";
 import keycloak from "./authentication/keycloak";
 import CLoadingOverlay from "./components/common/CLoadingOverlay";
 import CSnackbar from "./components/common/CSnackbar";
+import { useDispatch } from "react-redux";
+import { tryCreateSocialUser } from "./store/userSlice";
 
 function App() {
   return (
@@ -31,23 +33,26 @@ function App() {
 
 function Layout() {
   return (
-    <main className="flex flex-col min-h-[100vh] max-w-full relative">
+    <div className="flex flex-col min-h-[100vh] max-w-full relative" id="app-wrapper">
       <CLoadingOverlay></CLoadingOverlay>
       <CSnackbar></CSnackbar>
       <NavigationBar />
       <Outlet />
-    </main>
+    </div>
   );
 }
 
 function RequireAuth({ children }: { children: JSX.Element }) {
-  console.log(keycloak);
+  const dispatch = useDispatch();
+
   if (!keycloak.authenticated) {
     keycloak.login({
       // eslint-disable-next-line no-restricted-globals
       redirectUri: process.env.REACT_APP_URL + location.pathname,
     });
   } else {
+    // @ts-ignore
+    dispatch(tryCreateSocialUser());
     keycloak
       .updateToken(3000)
       .then(() => {
@@ -65,3 +70,4 @@ function RequireAuth({ children }: { children: JSX.Element }) {
 }
 
 export default App;
+export const routePathsRequiringLimitedNavigationBar = ["/create-account"];

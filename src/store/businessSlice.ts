@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./index";
 import { api } from "../service/apiClient";
 import { hideLoadingOverlay, showLoadingOverlay, showSnackbar } from "./eventSlice";
@@ -9,7 +9,7 @@ export interface State {
   businessPage: BusinessForPublicResponse | undefined;
   businessPages: BusinessForPublicResponse[] | undefined;
   businessPagesCurrentPage: number;
-  totalBusinessPagesPagesOnServer: number | undefined;
+  totalBusinessPagesPagesOnServer: number;
 
   businessProducts: Product[] | undefined;
   businessProductsCurrentPage: number;
@@ -67,7 +67,7 @@ export const businessSlice = createSlice({
       state.businessPagesCurrentPage = action.payload;
     },
     setTotalBusinessPagesOnServer: (state, action: PayloadAction<number | undefined>) => {
-      state.totalBusinessPagesPagesOnServer = action.payload;
+      state.totalBusinessPagesPagesOnServer = action.payload || -1;
     },
   },
 });
@@ -101,26 +101,28 @@ export const fetchPublicBusinessAnalytics = (businessId: string) => (dispatch: A
     );
 };
 
-export const fetchBusinessPages = (pageSize: number) => (dispatch: AppDispatch, state: () => RootState) => {
-  dispatch(showLoadingOverlay({ isInstant: false }));
-  return api.publicApi
-    .getBusinessListForPublic(pageSize, state().business.businessPagesCurrentPage + 1)
-    .then((response) => {
-      //@ts-ignore
-      dispatch(setBusinessPages(state().business.businessPages.concat(response.data.businessPageList)));
-      dispatch(setBusinessPagesCurrentPage(state().business.businessPagesCurrentPage + 1));
-      dispatch(setTotalBusinessPagesOnServer(response.data.totalAmountOfPages));
-    })
-    .catch((error) =>
-      dispatch(
-        showSnackbar({
-          message: i18n.t("somethingWentWrong"),
-          type: "error",
-        })
+export const fetchBusinessPages =
+  (pageSize: number = 15) =>
+  (dispatch: AppDispatch, state: () => RootState) => {
+    dispatch(showLoadingOverlay({ isInstant: false }));
+    return api.publicApi
+      .getBusinessListForPublic(pageSize, state().business.businessPagesCurrentPage + 1)
+      .then((response) => {
+        //@ts-ignore
+        dispatch(setBusinessPages(state().business.businessPages.concat(response.data.businessPageList)));
+        dispatch(setBusinessPagesCurrentPage(state().business.businessPagesCurrentPage + 1));
+        dispatch(setTotalBusinessPagesOnServer(response.data.totalAmountOfPages));
+      })
+      .catch((error) =>
+        dispatch(
+          showSnackbar({
+            message: i18n.t("somethingWentWrong"),
+            type: "error",
+          })
+        )
       )
-    )
-    .finally(() => dispatch(hideLoadingOverlay()));
-};
+      .finally(() => dispatch(hideLoadingOverlay()));
+  };
 
 export const fetchBusinessPage = (businessPageId: string) => (dispatch: AppDispatch, state: () => RootState) => {
   dispatch(showLoadingOverlay({ isInstant: false }));

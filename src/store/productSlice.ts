@@ -15,7 +15,7 @@ import i18n from "i18next";
 import qs from "qs";
 
 export interface State {
-  categories: Category[] | undefined;
+  categories: Category[];
   product: Product | undefined;
 
   products: Product[] | undefined;
@@ -67,7 +67,7 @@ export const productSlice = createSlice({
       state.product = action.payload;
     },
     setCategories: (state, action: PayloadAction<Category[] | undefined>) => {
-      state.categories = action.payload;
+      state.categories = action.payload || [];
     },
     resetProductsPagination: (state) => {
       state.productsCurrentPage = -1;

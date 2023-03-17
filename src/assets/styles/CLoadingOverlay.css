@@ -1,4 +1,4 @@
-main .MuiBackdrop-root {
+#app-wrapper .MuiBackdrop-root {
     background-color: var(--loading-overlay) !important;
     cursor: progress !important;
     z-index: 9999 !important;

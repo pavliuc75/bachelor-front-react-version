@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import "../../styles/CRatingEdit.css";
+import "../../assets/styles/CRatingEdit.css";
 
 interface Props {
   value?: number;

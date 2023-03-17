@@ -1,13 +1,16 @@
 import Backdrop from "@mui/material/Backdrop";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import "../../styles/CLoadingOverlay.css";
-import { useEffect, useState } from "react";
+import "../../assets/styles/CLoadingOverlay.css";
+import { useEffect, useRef, useState } from "react";
 
 function CLoadingOverlay() {
   const { isShown, isInstant } = useSelector((state: RootState) => state.event.loadingOverlay);
 
   const [isShownLocal, setIsShownLocal] = useState<boolean>(false);
+  const isShownRef = useRef<boolean>(false);
+
+  isShownRef.current = isShown;
 
   useEffect(() => {
     if (isShown) {
@@ -21,7 +24,7 @@ function CLoadingOverlay() {
     if (isInstant) {
       setIsShownLocal(true);
     } else {
-      setTimeout(() => setIsShownLocal(true), 3000);
+      setTimeout(() => setIsShownLocal(isShownRef.current), 3000);
     }
   }
 

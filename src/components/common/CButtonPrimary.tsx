@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import "../../styles/CButtonPrimary.css";
+import "../../assets/styles/CButtonPrimary.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { ButtonHTMLAttributes } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";

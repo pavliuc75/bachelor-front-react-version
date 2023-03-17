@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import "../../styles/CButtonSecondary.css";
+import "../../assets/styles/CButtonSecondary.css";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

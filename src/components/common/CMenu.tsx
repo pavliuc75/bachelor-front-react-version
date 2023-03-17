@@ -1,6 +1,6 @@
 import { Fragment, ReactNode, useState } from "react";
 import Menu from "@mui/material/Menu";
-import "../../styles/CMenu.css";
+import "../../assets/styles/CMenu.css";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
