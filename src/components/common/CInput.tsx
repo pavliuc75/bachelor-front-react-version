@@ -24,6 +24,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   isDisabled?: boolean;
   onUpdate: (value: string) => void;
   inputAfterSlot?: ReactNode;
+  className?: string;
 }
 
 function CInput(props: Props, ref: any) {
@@ -39,6 +40,7 @@ function CInput(props: Props, ref: any) {
     descriptionText,
     isDisabled,
     onUpdate,
+    className,
     ...inputProps
   } = props;
 
@@ -87,7 +89,7 @@ function CInput(props: Props, ref: any) {
   }
 
   return (
-    <div className="flex flex-none flex-col w-full" style={{ maxWidth: "calc(96px * 4)" }}>
+    <div className={className + " flex flex-none flex-col w-full"} style={{ maxWidth: "calc(96px * 4)" }}>
       {labelText && (
         <label
           htmlFor={inputId.current}
