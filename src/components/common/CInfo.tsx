@@ -22,10 +22,10 @@ function CInfo(props: Props) {
       baseClasses += " bg-background-success";
     }
     if (size === "sm") {
-      baseClasses += " pa-1";
+      baseClasses += " p-1";
     }
     if (size === "md") {
-      baseClasses += " pa-4";
+      baseClasses += " p-4";
     }
     return baseClasses;
   }

@@ -50,7 +50,7 @@ function CButtonPrimary(props: Props) {
       {iconEnd && (
         <FontAwesomeIcon
           icon={iconEnd}
-          className={classNames({ "mr-2": size === "small", "mr-3": size === "medium" })}
+          className={classNames({ "ml-2": size === "small", "ml-3": size === "medium" })}
           size={getIconSize()}
         />
       )}

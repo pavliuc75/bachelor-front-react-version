@@ -131,6 +131,10 @@ export const businessManagementToolSlice = createSlice({
       // @ts-ignore
       state.businessApplication.businessLegalDocuments.bankStatementFileKey = action.payload;
     },
+    setBusinessApplicationBankStatementFileUrl: (state, action: PayloadAction<string>) => {
+      // @ts-ignore
+      state.businessApplication.businessLegalDocuments.bankStatementFileUrl = action.payload;
+    },
     setBankStatementFileUrl: (state, action: PayloadAction<string>) => {
       // @ts-ignore
       state.businessApplication.businessLegalDocuments.bankStatementFileUrl = action.payload;
@@ -238,6 +242,7 @@ export const {
   setBusinessApplicationRegistrationCertificateKey,
   setBusinessApplicationRegistrationCertificateFileUrl,
   setBusinessApplicationBankStatementFileKey,
+  setBusinessApplicationBankStatementFileUrl,
   setBankStatementFileUrl,
   setBusinessApplicationPhoneNumber,
   setBusinessApplicationEmail,

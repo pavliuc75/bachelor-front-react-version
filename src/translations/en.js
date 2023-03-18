@@ -16,8 +16,7 @@ export default {
   required: "Required",
   minimumLengthIsFiveCharacters: "Minimum length is five characters",
   shouldContainANumber: "Should contain a number",
-  doYouWantToSellYourProductsOnOurPlatform:
-    "Do you want to sell your products on our platform",
+  doYouWantToSellYourProductsOnOurPlatform: "Do you want to sell your products on our platform",
   createABusinessPage: "Create a business page",
   createBusinessPage: "Create business page",
   companyName: "Company name",
@@ -25,15 +24,13 @@ export default {
   phoneNumber: "Phone number",
   invalidPhoneNumber: "Invalid phone number",
   examplePhoneNumber: "e.g. 079243546",
-  shouldConsistOfNineDigitsAndStartWithZero:
-    "Should consist of 9 digits and start with 0",
+  shouldConsistOfNineDigitsAndStartWithZero: "Should consist of 9 digits and start with 0",
   address: "Address",
   website: "Website",
   uploadCompanyLogo: "Upload company logo",
   resetImage: "Reset image",
   aLogoOfYourCompanyIsRequired: "A logo of your company is required",
-  somethingWentWrongWhileReadingTheFile:
-    "Something went wrong while reading the file",
+  somethingWentWrongWhileReadingTheFile: "Something went wrong while reading the file",
   yourAccount: "Your account",
   allCompanies: "All companies",
   socialMedia: "Social media",
@@ -73,8 +70,7 @@ export default {
   companyWebsite: "Company website",
   companyLogo: "Company logo",
   chooseFile: "Choose file",
-  theUpdatedFileHasToBeAnImage:
-    "The updated file has to be a JPEG, JPG, or PNG image.",
+  theUpdatedFileHasToBeAnImage: "The updated file has to be a JPEG, JPG, or PNG image.",
   identificationCode: "Unique identification code",
   tvaCode: "TVA number",
   businessEntityType: "Business entity type",
@@ -94,22 +90,20 @@ export default {
   exampleFacebookUrl: "e.g https://www.facebook.com/example",
   exampleInstagramUrl: "e.g. https://www.instagram.com/example",
   pleaseUploadAFile: "Please upload a file",
-  somethingWentWrongWhileUploadingTheFile:
-    "Something went wrong while uploading the file | Something went wrong while uploading the files",
+  somethingWentWrongWhileUploadingTheFile_one: "Something went wrong while uploading the file",
+  somethingWentWrongWhileUploadingTheFile_other: "Something went wrong while uploading the files",
   exampleIban: "e.g. MD21EX000000000001234567",
   exampleSwiftCode: "e.g. AGRNMD2X",
   companyEmail: "Company email",
   shouldContainOnlyDigits: "Should contain only digits",
   shoppingCart: "Shopping cart",
-  shoppingCartDescription:
-    "Find all the items you have previously put into the shopping cart",
+  shoppingCartDescription: "Find all the items you have previously put into the shopping cart",
   favoriteItems: "Favorite items",
   favoriteItemsDescription: "Find all the items you have previously liked",
   businessManagementToolDescription: "Manage your business from here",
   administratorManagementToolDescription: "Manage your the platform from here",
   logout: "Logout",
-  logoutDescription:
-    "Logout from your account. You will be redirected to the front page",
+  logoutDescription: "Logout from your account. You will be redirected to the front page",
   emptyWithBraces: "(empty)",
   empty: "Empty",
   createBusinessPageRequest: "Create business page request",
@@ -120,8 +114,7 @@ export default {
   confirm: "Confirm",
   accept: "Accept",
   decline: "Decline",
-  pleaseSpecifyWhatIsWrongWithTheApplication:
-    "Please specify the reason (if any)",
+  pleaseSpecifyWhatIsWrongWithTheApplication: "Please specify the reason (if any)",
   declineApplication: "Decline application",
   someImageUploaded: "Some image uploaded",
   somePdfUploaded: "Some PDF uploaded",
@@ -133,8 +126,7 @@ export default {
   status: "Status",
   theReviewIsStillProcessing: "The review is still processing",
   yourRequestHasBeenDenied: "Your request has been denied",
-  businessPageIsCurrentlyHiddenFromUsers:
-    "Business is currently hidden from users",
+  businessPageIsCurrentlyHiddenFromUsers: "Business is currently hidden from users",
   loadMore: "Load more",
   businessPages: "Business pages",
   overview: "Overview",
@@ -150,10 +142,8 @@ export default {
   category: "Category",
   mainImage: "Main image",
   image: "Image",
-  theFilesBelowHaveToBeInPngCommaJpgOrJpegFormat:
-    "The files below have to be in PNG, JPG, or JPEG format.",
-  mainImageDescription:
-    "This will be the primary image displayed across the website.",
+  theFilesBelowHaveToBeInPngCommaJpgOrJpegFormat: "The files below have to be in PNG, JPG, or JPEG format.",
+  mainImageDescription: "This will be the primary image displayed across the website.",
   firstSecondaryImageDescription:
     "This and the following images will be displayed only on the product page. You can upload up to 5 of them.",
   pricePerUnit: "Price per unit",
@@ -191,10 +181,10 @@ export default {
   requestHasBeenSent: "Request has been sent",
   failedToRejectTheRequest: "Failed to reject the request",
   failedToApproveTheRequest: "Failed to approve the request",
-  productsInStock: "product in stock | products in stock",
+  productsInStock_one: "product in stock",
+  productsInStock_other: "products in stock",
   soldInTotal: "sold in total",
-  somethingWentWrongWhileLoadingProducts:
-    "Something went wrong while loading products",
+  somethingWentWrongWhileLoadingProducts: "Something went wrong while loading products",
   showingOutOf: "Showing {amount} out of {total}",
   viewAllResults: "View all results",
   searchResultsFor: "Search results for",
@@ -235,8 +225,7 @@ export default {
   exitDialog: "Exit dialog",
   supportDiscussions: "Support discussions",
   myOrders: "My orders",
-  myOrdersDescription:
-    "Here you can see all of your completed and current orders",
+  myOrdersDescription: "Here you can see all of your completed and current orders",
   seeDetails: "See details",
   allOrders: "All orders",
   awaitingShipment: "Awaiting shipment",
@@ -254,8 +243,7 @@ export default {
   amount: "Amount",
   orderConfirmed: "Order confirmed",
   orderFailed: "Order failed",
-  orderFailedDescription:
-    "Something went wrong while placing the order. Please try again.",
+  orderFailedDescription: "Something went wrong while placing the order. Please try again.",
   orderConfirmedDescription:
     "Your order has been successfully placed. You can see the details of the order in the 'My orders' section.",
   failedToLoadOrders: "Failed to load orders",

@@ -1,4 +1,4 @@
-import { HTMLProps, useRef, useState } from "react";
+import { forwardRef, HTMLProps, useImperativeHandle, useRef, useState } from "react";
 import { stringGeneratorHelper } from "../../utils/stringGeneratorHelper";
 import { useTranslation } from "react-i18next";
 import CButtonPrimary from "./CButtonPrimary";
@@ -8,10 +8,11 @@ interface Props extends HTMLProps<HTMLInputElement> {
   descriptionText?: string;
   nonNativeFileName?: string;
   onFileSelected?: (file: File) => void;
+  className?: string;
 }
 
-function CFileInput(props: Props) {
-  const { labelText, descriptionText, nonNativeFileName, onFileSelected, ...inputProps } = props;
+function CFileInput(props: Props, ref: any) {
+  const { labelText, descriptionText, nonNativeFileName, onFileSelected, className = "", ...inputProps } = props;
   const { t } = useTranslation();
   const reader = new FileReader();
 
@@ -19,6 +20,8 @@ function CFileInput(props: Props) {
   const [fileName, setFileName] = useState("");
   const [errorText, setErrorText] = useState("");
   const [file, setFile] = useState<File | null>(null);
+
+  useImperativeHandle(ref, () => ({ validateInput, reset }));
 
   function handleChooseFileClick() {
     document.getElementById(inputId.current)?.click();
@@ -60,7 +63,7 @@ function CFileInput(props: Props) {
   }
 
   return (
-    <div className="flex flex-col w-full" style={{ maxWidth: "calc(96px * 4)" }}>
+    <div className={className + " flex flex-col w-full"} style={{ maxWidth: "calc(96px * 4)" }}>
       {labelText && (
         <label htmlFor={inputId.current} className="c-text-14 mb-2 inline-block self-start">
           {labelText}
@@ -74,11 +77,11 @@ function CFileInput(props: Props) {
           iconEnd={["fas", "upload"]}></CButtonPrimary>
         {(fileName || nonNativeFileName) && <span className="c-text-12">{fileName || nonNativeFileName}</span>}
         {errorText && <span className="c-text-12 text-error">{errorText}</span>}
-        {descriptionText && <p className="mt-2">{descriptionText}</p>}
-        <input {...inputProps} className="hidden" type="file" id={inputId.current} onChange={handleFileInputChange} />
       </div>
+      {descriptionText && <p className="mt-2">{descriptionText}</p>}
+      <input {...inputProps} className="hidden" type="file" id={inputId.current} onChange={handleFileInputChange} />
     </div>
   );
 }
 
-export default CFileInput;
+export default forwardRef(CFileInput);

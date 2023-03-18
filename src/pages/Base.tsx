@@ -15,11 +15,13 @@ import CLoadingOverlay from "../components/common/CLoadingOverlay";
 import CPagination from "../components/common/CPagination";
 import CRating from "../components/common/CRating";
 import CRatingEdit from "../components/common/CRatingEdit";
+import { useTranslation } from "react-i18next";
 
 //todo
 
 function Base() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const isSnackbarShown = useSelector((state: RootState) => state.event.snackbar.isShown);
 
   const [text, setText] = useState<string>("");
@@ -44,6 +46,7 @@ function Base() {
   return (
     <div>
       <h1>Base</h1>
+      {t("somethingWentWrongWhileUploadingTheFile", { count: 1 })}
       {isSnackbarShown.toString()}
       <button onClick={() => dispatch(showSnackbar({ message: "a", type: "a" }))}>Show Snackbar</button>
       <br></br>

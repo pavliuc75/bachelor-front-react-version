@@ -15,6 +15,7 @@ import BusinessManagementToolEditBusinessPage from "./pages/BusinessManagementTo
 import BusinessManagementToolProducts from "./pages/BusinessManagementToolProducts";
 import BusinessManagementToolOrders from "./pages/BusinessManagementToolOrders";
 import BusinessManagementToolOther from "./pages/BusinessManagementToolOther";
+import CreateBusinessPage from "./pages/CreateBusinessPage";
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
           element={
             <RequireAuth>
               <Account />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/create-business-page"
+          element={
+            <RequireAuth>
+              <CreateBusinessPage />
             </RequireAuth>
           }
         />
