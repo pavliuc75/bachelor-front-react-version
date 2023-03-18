@@ -16,6 +16,8 @@ import CPagination from "../components/common/CPagination";
 import CRating from "../components/common/CRating";
 import CRatingEdit from "../components/common/CRatingEdit";
 
+//todo
+
 function Base() {
   const dispatch = useDispatch();
   const isSnackbarShown = useSelector((state: RootState) => state.event.snackbar.isShown);
@@ -65,9 +67,6 @@ function Base() {
         }}></CInput>
       <button onClick={handleShowOverlay}>show overlay</button>
       <button onClick={handleShowMenu}>show menu</button>
-      <CMenu items={[{ name: "a" }]}>
-        <div>a</div>
-      </CMenu>
       <CPagination onCurrentPageChanged={() => {}} currentPage={3} totalPages={10}></CPagination>
       <CRating value={3.5} totalRatings={5} isTotalRatingShown={true}></CRating>
       <CRatingEdit value={3}></CRatingEdit>

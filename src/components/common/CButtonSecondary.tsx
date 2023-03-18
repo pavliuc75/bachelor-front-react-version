@@ -10,10 +10,11 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconEnd?: IconProp;
   size?: "small" | "medium";
   isDisabled?: boolean;
+  className?: string;
 }
 
 function CButtonSecondary(props: Props) {
-  const { text, iconStart, iconEnd, size = "small", isDisabled, ...buttonProps } = props;
+  const { text, iconStart, iconEnd, size = "small", isDisabled, className, ...buttonProps } = props;
 
   function getIconSize() {
     if (size === "small") return "2xs";
@@ -26,6 +27,7 @@ function CButtonSecondary(props: Props) {
       disabled={isDisabled}
       className={classNames({
         "text-mid-gray hover-disabled no-underline": isDisabled,
+        [className || ""]: true,
         "flex flex-none items-center tracking-[unset] underline hover:text-dark-blue hover:no-underline": true,
       })}>
       {iconStart && (

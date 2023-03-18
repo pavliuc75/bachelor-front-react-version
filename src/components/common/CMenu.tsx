@@ -5,12 +5,12 @@ import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
-  items?: { name?: string; selected?: boolean; function?: () => any }[];
+  items?: { text?: string; selected?: boolean; function?: () => any }[];
   isRadio?: boolean;
   isCheckbox?: boolean;
   listItemEndSlot?: any;
   isDisabled?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 function CMenu(props: Props) {
@@ -57,7 +57,7 @@ function CMenu(props: Props) {
                   "mr-3": isRadio || isCheckbox,
                   "c-text-12": true,
                 })}>
-                {item.name}
+                {item.text}
               </span>
               {listItemEndSlot ? (
                 listItemEndSlot(item)

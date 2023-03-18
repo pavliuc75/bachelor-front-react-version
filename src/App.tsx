@@ -10,6 +10,11 @@ import CLoadingOverlay from "./components/common/CLoadingOverlay";
 import CSnackbar from "./components/common/CSnackbar";
 import { useDispatch } from "react-redux";
 import { tryCreateSocialUser } from "./store/userSlice";
+import BusinessManagementTool from "./pages/BusinessManagementTool";
+import BusinessManagementToolEditBusinessPage from "./pages/BusinessManagementToolEditBusinessPage";
+import BusinessManagementToolProducts from "./pages/BusinessManagementToolProducts";
+import BusinessManagementToolOrders from "./pages/BusinessManagementToolOrders";
+import BusinessManagementToolOther from "./pages/BusinessManagementToolOther";
 
 function App() {
   return (
@@ -24,6 +29,20 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route
+          path="/business-management-tool"
+          element={
+            <RequireAuth>
+              <BusinessManagementTool />
+            </RequireAuth>
+          }>
+          <Route
+            path="/business-management-tool/edit-business-page"
+            element={<BusinessManagementToolEditBusinessPage />}></Route>
+          <Route path="/business-management-tool/products" element={<BusinessManagementToolProducts />}></Route>
+          <Route path="/business-management-tool/orders" element={<BusinessManagementToolOrders />}></Route>
+          <Route path="/business-management-tool/other" element={<BusinessManagementToolOther />}></Route>
+        </Route>
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
