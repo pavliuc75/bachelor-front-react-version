@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import classNames from "classnames";
-import {stringGeneratorHelper} from "../../utils/stringGeneratorHelper";
+import { stringGeneratorHelper } from "../../utils/stringGeneratorHelper";
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   size?: "small" | "medium" | "large";
@@ -22,6 +22,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   grow?: boolean;
   isDisabled?: boolean;
   onUpdate: (value: string) => void;
+  className?: string;
 }
 
 function CTextarea(props: Props, ref: any) {
@@ -37,6 +38,7 @@ function CTextarea(props: Props, ref: any) {
     grow,
     isDisabled,
     onUpdate,
+    className,
     ...textareaProps
   } = props;
 
@@ -44,7 +46,7 @@ function CTextarea(props: Props, ref: any) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [errorTextLocal, setErrorTextLocal] = useState(errorText);
 
-  useImperativeHandle(ref, () => ({forceFocus, validateInput}));
+  useImperativeHandle(ref, () => ({ forceFocus, validateInput }));
 
   useEffect(() => {
     setErrorTextLocal(errorText);
@@ -67,7 +69,6 @@ function CTextarea(props: Props, ref: any) {
     textareaRef.current?.focus();
   }
 
-
   function validateInput(input = value) {
     for (const validatorFunction of validatorFunctions) {
       let result = validatorFunction(input || "");
@@ -82,54 +83,55 @@ function CTextarea(props: Props, ref: any) {
   }
 
   return (
-      <div
+    <div
+      className={classNames({
+        "max-w-[384px]": !grow,
+        [className || ""]: true,
+        "flex flex-none flex-col w-full": true,
+      })}>
+      {labelText && (
+        <label
+          htmlFor={textareaId.current}
           className={classNames({
-            "max-w-[384px]": !grow,
-            "flex flex-none flex-col w-full": true,
+            "c-text-12 mb-0.5": size === "small",
+            "c-text-14 mb-0.5": size === "medium",
+            "inline-block": true,
           })}>
-        {labelText && (
-            <label
-                htmlFor={textareaId.current}
-                className={classNames({
-                  "c-text-12 mb-0.5": size === "small",
-                  "c-text-14 mb-0.5": size === "medium",
-                  "inline-block": true,
-                })}>
-              {labelText}
-            </label>
-        )}
-        <div className="flex flex-none">
+          {labelText}
+        </label>
+      )}
+      <div className="flex flex-none">
         <textarea
-            {...textareaProps}
-            value={value || ""}
-            disabled={isDisabled}
-            ref={textareaRef}
-            rows={rows}
-            onInput={handleInput}
-            onBlur={handleBlur}
-            id={textareaId.current}
-            className={classNames({
-              "px-3 py-2 c-text-14": size === "small",
-              "px-4 py-2.5": size === "medium",
-              "border-error focus-visible:border-error": errorTextLocal != null,
-              "focus-visible:border-dark-blue": errorTextLocal == null,
-              "border-spun-pearl focus-visible:border-spun-pearl text-mid-gray": isDisabled,
-              "resize-none w-full tracking-[unset] border border-solid border-mid-gray rounded-lg focus-visible:outline-none focus-visible:border-2 placeholder:text-spun-pearl":
-                  true,
-            })}></textarea>
-        </div>
-        {errorTextLocal && (
-            <span
-                className={classNames({
-                  "ml-3": size === "small",
-                  "ml-4": size === "medium",
-                  "ml-6": size === "large",
-                  "block c-text-12 mt-1 text-error ml-4": true,
-                })}>
+          {...textareaProps}
+          value={value || ""}
+          disabled={isDisabled}
+          ref={textareaRef}
+          rows={rows}
+          onInput={handleInput}
+          onBlur={handleBlur}
+          id={textareaId.current}
+          className={classNames({
+            "px-3 py-2 c-text-14": size === "small",
+            "px-4 py-2.5": size === "medium",
+            "border-error focus-visible:border-error": errorTextLocal != null,
+            "focus-visible:border-dark-blue": errorTextLocal == null,
+            "border-spun-pearl focus-visible:border-spun-pearl text-mid-gray": isDisabled,
+            "resize-none w-full tracking-[unset] border border-solid border-mid-gray rounded-lg focus-visible:outline-none focus-visible:border-2 placeholder:text-spun-pearl":
+              true,
+          })}></textarea>
+      </div>
+      {errorTextLocal && (
+        <span
+          className={classNames({
+            "ml-3": size === "small",
+            "ml-4": size === "medium",
+            "ml-6": size === "large",
+            "block c-text-12 mt-1 text-error ml-4": true,
+          })}>
           {errorTextLocal}
         </span>
-        )}
-      </div>
+      )}
+    </div>
   );
 }
 
