@@ -149,7 +149,8 @@ export const administratorManagementToolSlice = createSlice({
       const order = action.payload;
       let index = state.orders?.findIndex((o) => o.id === order.id);
       if (index !== -1) {
-        state.orders?.splice(index || -1, 1, order);
+        // @ts-ignore
+        state.orders?.splice(index, 1, order);
       }
     },
   },

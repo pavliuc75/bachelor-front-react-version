@@ -28,7 +28,7 @@ export interface State {
   productsTotalPages: number;
   productsCurrentPage: number;
   orders: OrderToFulfill[] | undefined;
-  ordersTotalPages: number | undefined;
+  ordersTotalPages: number;
   ordersCurrentPage: number;
   ordersCurrentFilter: OrderStatus | "ALL";
   businessAnalytics: PrivateBusinessAnalytics | undefined;
@@ -56,7 +56,7 @@ export const businessManagementToolSlice = createSlice({
       state.orders = action.payload;
     },
     setOrdersTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.ordersTotalPages = action.payload;
+      state.ordersTotalPages = action.payload || 1;
     },
     setOrdersCurrentPage: (state, action: PayloadAction<number>) => {
       state.ordersCurrentPage = action.payload;
@@ -66,9 +66,10 @@ export const businessManagementToolSlice = createSlice({
     },
     updateOrderInOrders: (state, action: PayloadAction<OrderToFulfill>) => {
       const order = action.payload;
-      let index = state?.orders?.findIndex((o) => o.id === order.id);
+      let index = state.orders?.findIndex((o) => o.id === order.id);
       if (index !== -1) {
-        state?.orders?.splice(index || -1, 1, order);
+        // @ts-ignore
+        state.orders?.splice(index, 1, order);
       }
     },
 

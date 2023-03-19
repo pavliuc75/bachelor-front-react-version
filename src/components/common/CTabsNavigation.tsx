@@ -3,13 +3,14 @@ import CButtonSecondary from "./CButtonSecondary";
 interface Props {
   tabs: { selected: boolean; name: string }[];
   onTabSelected: (tab: { selected: boolean; name: string }) => void;
+  className?: string;
 }
 
 function CTabsNavigation(props: Props) {
-  const { tabs, onTabSelected } = props;
+  const { tabs, onTabSelected, className = "" } = props;
 
   return (
-    <div className="flex flex-row gap-3 flex-wrap">
+    <div className={className + " flex flex-row gap-3 flex-wrap"}>
       {tabs.map((tab, index) => (
         <div key={index}>
           {tab.selected ? (
