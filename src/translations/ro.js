@@ -134,7 +134,7 @@ export default {
   management: "Management",
   edit: "Editați",
   delete: "Șterge",
-  doYouReallyWantToDelete: "DChiar doriți să ștergeți {name}?",
+  doYouReallyWantToDelete: "DChiar doriți să ștergeți {{name}}?",
   deleteProduct: "Ștergeți produsul",
   addProduct: "Adăugați produs",
   editProduct: "Editați produsul",

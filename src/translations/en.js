@@ -134,7 +134,7 @@ export default {
   management: "Management",
   edit: "Edit",
   delete: "Delete",
-  doYouReallyWantToDelete: "Do you really want to delete {name}?",
+  doYouReallyWantToDelete: "Do you really want to delete {{name}}?",
   deleteProduct: "Delete product",
   addProduct: "Add product",
   editProduct: "Edit product",

@@ -25,7 +25,7 @@ export interface State {
   businessApplication: BusinessApplication | undefined;
   businessApplicationReview: BusinessApplicationReview | undefined;
   products: Product[] | undefined;
-  productsTotalPages: number | undefined;
+  productsTotalPages: number;
   productsCurrentPage: number;
   orders: OrderToFulfill[] | undefined;
   ordersTotalPages: number | undefined;
@@ -81,7 +81,7 @@ export const businessManagementToolSlice = createSlice({
     },
 
     setProductsTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.productsTotalPages = action.payload;
+      state.productsTotalPages = action.payload || 1;
     },
     setProductsCurrentPage: (state, action: PayloadAction<number>) => {
       state.productsCurrentPage = action.payload;

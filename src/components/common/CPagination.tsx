@@ -5,10 +5,11 @@ interface Props {
   onCurrentPageChanged: (newPage: number) => void;
   currentPage: number;
   totalPages: number;
+  className?: string;
 }
 
 function CPagination(props: Props) {
-  const { onCurrentPageChanged, currentPage, totalPages } = props;
+  const { onCurrentPageChanged, currentPage, totalPages, className = "" } = props;
 
   function getPages() {
     let current = currentPage,
@@ -42,7 +43,7 @@ function CPagination(props: Props) {
   }
 
   return (
-    <ul className="flex flex-row grow-0 items-center">
+    <ul className={className + " flex flex-row grow-0 items-center"}>
       <li>
         {currentPage !== 1 && (
           <FontAwesomeIcon
