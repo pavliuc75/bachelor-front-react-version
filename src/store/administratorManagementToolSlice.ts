@@ -34,7 +34,7 @@ export interface State {
   createCategoryRequestsTotalPages: number;
   createCategoryRequests: CategoryApplication[] | undefined;
   orders: OrderToFulfill[] | undefined;
-  ordersTotalPages: number | undefined;
+  ordersTotalPages: number;
   ordersCurrentPage: number;
   ordersCurrentFilter: "ALL" | OrderStatus;
   threads: SupportThread[];
@@ -137,7 +137,7 @@ export const administratorManagementToolSlice = createSlice({
       state.orders = action.payload;
     },
     setOrdersTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.ordersTotalPages = action.payload;
+      state.ordersTotalPages = action.payload || 1;
     },
     setOrdersCurrentPage: (state, action: PayloadAction<number>) => {
       state.ordersCurrentPage = action.payload;

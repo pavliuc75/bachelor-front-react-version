@@ -5,12 +5,7 @@ import {
   PatchOrderToFulfillStatusRequest,
   ProductInOrder,
 } from "../../generated-sources/openapi";
-import "../../assets/styles/BusinessOrderListItem.scss";
-import { useState } from "react";
-import { stringFormatterHelper } from "../../utils/stringFormatterHelper";
-import { useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { updateOrderStatus, updateProductStatus } from "../../store/businessManagementToolSlice";
+import "../../assets/styles/AdministratorOrderListItem.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dateFormatterHelper } from "../../utils/dateFormatterHelper";
 import CButtonSecondary from "../common/CButtonSecondary";
@@ -18,14 +13,19 @@ import CDialog from "../common/CDialog";
 import CMenu from "../common/CMenu";
 import CButtonPrimary from "../common/CButtonPrimary";
 import ProductItemFromOrder from "../order/ProductItemFromOrder";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { stringFormatterHelper } from "../../utils/stringFormatterHelper";
+import { updateOrderStatus, updateProductStatus } from "../../store/administratorManagementToolSlice";
 
 interface Props {
   order: OrderToFulfill;
 }
 
-function BusinessOrderListItem(props: Props) {
-  const { t } = useTranslation();
+function AdministratorOrderListItem(props: Props) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { order } = props;
 
@@ -40,84 +40,57 @@ function BusinessOrderListItem(props: Props) {
   }
 
   function getAvailableOrderStatuses() {
-    return [
-      {
-        text: t("awaitingShipment"),
-        value: OrderStatus.AwaitingShipment,
-        selected: order.orderStatus === OrderStatus.AwaitingShipment,
+    let availableOrderStatuses = Object.values(OrderStatus);
+    return availableOrderStatuses.map((status: string) => {
+      return {
+        text: getFormattedStatus(status),
+        value: status,
+        selected: order.orderStatus === status,
         function: () => {
-          if (order.orderStatus !== OrderStatus.AwaitingShipment) {
+          if (order.orderStatus !== status) {
             let patchOrderToFulfillStatusRequest: PatchOrderToFulfillStatusRequest = {
               orderId: order.id || "",
-              status: OrderStatus.AwaitingShipment,
+              // @ts-ignore
+              status: status,
             };
             // @ts-ignore
             dispatch(updateOrderStatus(patchOrderToFulfillStatusRequest));
           }
         },
-      },
-      {
-        text: t("readyForShipment"),
-        value: OrderStatus.ReadyForShipment,
-        selected: order.orderStatus === OrderStatus.ReadyForShipment,
+      };
+    });
+  }
+
+  function getAvailableProductStatuses(product: ProductInOrder) {
+    let availableOrderStatuses = Object.values(OrderStatus);
+    return availableOrderStatuses.map((status: string) => {
+      return {
+        text: getFormattedStatus(status),
+        value: status,
+        selected: product.orderStatus === status,
         function: () => {
-          if (order.orderStatus !== OrderStatus.ReadyForShipment) {
-            let patchOrderToFulfillStatusRequest: PatchOrderToFulfillStatusRequest = {
+          if (product.orderStatus !== status) {
+            let patchOrderToFulfillProductStatusRequest: PatchOrderToFulfillProductStatusRequest = {
               orderId: order.id || "",
-              status: OrderStatus.ReadyForShipment,
+              productId: product.id || "",
+              // @ts-ignore
+              status: status,
             };
             // @ts-ignore
-            dispatch(updateOrderStatus(patchOrderToFulfillStatusRequest));
+            dispatch(updateProductStatus(patchOrderToFulfillProductStatusRequest));
           }
         },
-      },
-    ];
+      };
+    });
   }
 
   function getFormattedStatus(status: string): string {
     return t(stringFormatterHelper.underscoreToCamelCase(status.toLowerCase()));
   }
 
-  function getAvailableProductStatuses(product: ProductInOrder) {
-    return [
-      {
-        text: t("awaitingShipment"),
-        value: OrderStatus.AwaitingShipment,
-        selected: product.orderStatus === OrderStatus.AwaitingShipment,
-        function: () => {
-          if (product.orderStatus !== OrderStatus.AwaitingShipment) {
-            let patchOrderToFulfillProductStatusRequest: PatchOrderToFulfillProductStatusRequest = {
-              orderId: order.id || "",
-              productId: product.id || "",
-              status: OrderStatus.AwaitingShipment,
-            };
-            // @ts-ignore
-            dispatch(updateProductStatus(patchOrderToFulfillProductStatusRequest));
-          }
-        },
-      },
-      {
-        text: t("readyForShipment"),
-        value: OrderStatus.ReadyForShipment,
-        selected: product.orderStatus === OrderStatus.ReadyForShipment,
-        function: () => {
-          if (product.orderStatus !== OrderStatus.ReadyForShipment) {
-            let patchOrderToFulfillProductStatusRequest: PatchOrderToFulfillProductStatusRequest = {
-              orderId: order.id || "",
-              productId: product.id || "",
-              status: OrderStatus.ReadyForShipment,
-            };
-            // @ts-ignore
-            dispatch(updateProductStatus(patchOrderToFulfillProductStatusRequest));
-          }
-        },
-      },
-    ];
-  }
-
   return (
     <div
-      data-css="BusinessOrderListItem"
+      data-css="AdministratorOrderListItem"
       className={"h-14 border border-solid border-mid-gray flex flex-row items-center px-5 justify-between"}>
       <div className="flex flex-row items-center gap-4">
         <FontAwesomeIcon
@@ -163,17 +136,12 @@ function BusinessOrderListItem(props: Props) {
                     <p>{t("status")}</p>
                   </td>
                   <td>
-                    {order.orderStatus === OrderStatus.AwaitingShipment ||
-                    order.orderStatus === OrderStatus.ReadyForShipment ? (
-                      <CMenu isRadio={true} items={getAvailableOrderStatuses()}>
-                        <CButtonPrimary
-                          type="button"
-                          text={getFormattedStatus(order.orderStatus)}
-                          iconEnd={["fas", "chevron-down"]}></CButtonPrimary>
-                      </CMenu>
-                    ) : (
-                      <span className={"label block"}>{getFormattedStatus(order.orderStatus || "")}</span>
-                    )}
+                    <CMenu isRadio={true} items={getAvailableOrderStatuses()}>
+                      <CButtonPrimary
+                        type="button"
+                        text={getFormattedStatus(order.orderStatus || "")}
+                        iconEnd={["fas", "chevron-down"]}></CButtonPrimary>
+                    </CMenu>
                   </td>
                 </tr>
                 <tr>
@@ -224,17 +192,12 @@ function BusinessOrderListItem(props: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
               {order.productList?.map((product) => (
                 <ProductItemFromOrder product={product} key={product.id}>
-                  {product.orderStatus === OrderStatus.AwaitingShipment ||
-                  product.orderStatus === OrderStatus.ReadyForShipment ? (
-                    <CMenu isRadio={true} items={getAvailableProductStatuses(product)}>
-                      <CButtonPrimary
-                        type="button"
-                        text={getFormattedStatus(product.orderStatus)}
-                        iconEnd={["fas", "chevron-down"]}></CButtonPrimary>
-                    </CMenu>
-                  ) : (
-                    <span className={"label block"}>{getFormattedStatus(product.orderStatus || "")}</span>
-                  )}
+                  <CMenu isRadio={true} items={getAvailableProductStatuses(product)}>
+                    <CButtonPrimary
+                      type="button"
+                      text={getFormattedStatus(product.orderStatus || "")}
+                      iconEnd={["fas", "chevron-down"]}></CButtonPrimary>
+                  </CMenu>
                 </ProductItemFromOrder>
               ))}
             </div>
@@ -245,4 +208,4 @@ function BusinessOrderListItem(props: Props) {
   );
 }
 
-export default BusinessOrderListItem;
+export default AdministratorOrderListItem;
