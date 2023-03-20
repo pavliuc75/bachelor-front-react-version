@@ -175,7 +175,7 @@ function NavigationBarLeftSideBar(props: Props) {
                 <li key={category.id}>
                   <Link
                     to={{
-                      pathname: "/base",
+                      pathname: "/",
                       search: new URLSearchParams({ categories: category.id ?? "" }).toString(),
                     }}>
                     <CButtonSecondary

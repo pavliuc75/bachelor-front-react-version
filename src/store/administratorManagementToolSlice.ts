@@ -25,13 +25,13 @@ export interface State {
   createBusinessPageRequestsTotalPages: number;
   createBusinessPageRequests: BusinessApplication[] | undefined;
   businessPagesCurrentPage: number;
-  businessPagesTotalPages: number | undefined;
+  businessPagesTotalPages: number;
   businessPages: Business[] | undefined;
   categoriesCurrentPage: number;
-  categoriesTotalPages: number | undefined;
+  categoriesTotalPages: number;
   categories: Category[] | undefined;
   createCategoryRequestsCurrentPage: number;
-  createCategoryRequestsTotalPages: number | undefined;
+  createCategoryRequestsTotalPages: number;
   createCategoryRequests: CategoryApplication[] | undefined;
   orders: OrderToFulfill[] | undefined;
   ordersTotalPages: number | undefined;
@@ -101,14 +101,14 @@ export const administratorManagementToolSlice = createSlice({
       state.createCategoryRequestsCurrentPage = action.payload;
     },
     setCreateCategoryRequestsTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.createCategoryRequestsTotalPages = action.payload;
+      state.createCategoryRequestsTotalPages = action.payload || 1;
     },
 
     setCategoriesCurrentPage: (state, action: PayloadAction<number>) => {
       state.categoriesCurrentPage = action.payload;
     },
     setCategoriesTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.categoriesTotalPages = action.payload;
+      state.categoriesTotalPages = action.payload || 1;
     },
     setCategories: (state, action: PayloadAction<Category[] | undefined>) => {
       state.categories = action.payload;
@@ -118,7 +118,7 @@ export const administratorManagementToolSlice = createSlice({
       state.businessPagesCurrentPage = action.payload;
     },
     setBusinessPagesTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.businessPagesTotalPages = action.payload;
+      state.businessPagesTotalPages = action.payload || 1;
     },
     setBusinessPages: (state, action: PayloadAction<Business[] | undefined>) => {
       state.businessPages = action.payload;

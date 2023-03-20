@@ -165,7 +165,7 @@ export default {
   createCategoryRequests: "Creați solicitări de categorie",
   categories: "Categorii",
   deleteCategory: "Șterge categoria",
-  doYouReallyWantToReject: "Chiar vrei să respingi {name}?",
+  doYouReallyWantToReject: "Chiar vrei să respingi {{name}}?",
   rejectNewCategoryRequest: "Respinge cererea de categorie nouă",
   reject: "Respinge",
   allProducts: "Toate produsele",

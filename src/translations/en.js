@@ -165,7 +165,7 @@ export default {
   createCategoryRequests: "Create category requests",
   categories: "Categories",
   deleteCategory: "Delete category",
-  doYouReallyWantToReject: "Do you really want to reject {name}?",
+  doYouReallyWantToReject: "Do you really want to reject {{name}}?",
   rejectNewCategoryRequest: "Reject new category request",
   reject: "Reject",
   allProducts: "All products",

@@ -1,4 +1,4 @@
-import { BusinessApplication } from "../../generated-sources/openapi";
+import { Business, BusinessApplication } from "../../generated-sources/openapi";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { downloadLegalDocument } from "../../store/administratorManagementToolSlice";
@@ -8,7 +8,7 @@ import CButtonSecondary from "../common/CButtonSecondary";
 import CImageWithFallback from "../common/CImageWithFallback";
 
 interface Props {
-  business: BusinessApplication;
+  business: BusinessApplication | Business;
 }
 
 function BusinessOverview(props: Props) {
