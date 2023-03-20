@@ -22,7 +22,7 @@ import i18n from "i18next";
 
 export interface State {
   createBusinessPageRequestsCurrentPage: number;
-  createBusinessPageRequestsTotalPages: number | undefined;
+  createBusinessPageRequestsTotalPages: number;
   createBusinessPageRequests: BusinessApplication[] | undefined;
   businessPagesCurrentPage: number;
   businessPagesTotalPages: number | undefined;
@@ -130,7 +130,7 @@ export const administratorManagementToolSlice = createSlice({
       state.createBusinessPageRequestsCurrentPage = action.payload;
     },
     setCreateBusinessPageRequestsTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.createBusinessPageRequestsTotalPages = action.payload;
+      state.createBusinessPageRequestsTotalPages = action.payload || 1;
     },
 
     setOrders: (state, action: PayloadAction<OrderToFulfill[] | undefined>) => {

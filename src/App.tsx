@@ -16,6 +16,14 @@ import BusinessManagementToolProducts from "./pages/BusinessManagementToolProduc
 import BusinessManagementToolOrders from "./pages/BusinessManagementToolOrders";
 import BusinessManagementToolOther from "./pages/BusinessManagementToolOther";
 import CreateBusinessPage from "./pages/CreateBusinessPage";
+import AdministratorManagementTool from "./pages/AdministratorManagementTool";
+import AdministratorManagementToolBusinessPages from "./pages/AdministratorManagementToolBusinessPages";
+import AdministratorManagementToolCategories from "./pages/AdministratorManagementToolCategories";
+import AdministratorManagementToolCreateBusinessPageRequests from "./pages/AdministratorManagementToolCreateBusinessPageRequests";
+import AdministratorManagementToolCreateCategoryRequests from "./pages/AdministratorManagementToolCreateCategoryRequests";
+import AdministratorManagementToolOrders from "./pages/AdministratorManagementToolOrders";
+import AdministratorManagementToolStats from "./pages/AdministratorManagementToolStats";
+import AdministratorManagementToolSupportDiscussions from "./pages/AdministratorManagementToolSupportDiscussions";
 
 function App() {
   return (
@@ -38,6 +46,31 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route
+          path="administrator-management-tool"
+          element={
+            <RequireAuth>
+              <AdministratorManagementTool />
+            </RequireAuth>
+          }>
+          <Route
+            path="/administrator-management-tool/business-pages"
+            element={<AdministratorManagementToolBusinessPages />}></Route>
+          <Route
+            path="/administrator-management-tool/categories"
+            element={<AdministratorManagementToolCategories />}></Route>
+          <Route
+            path="/administrator-management-tool/create-business-page-requests"
+            element={<AdministratorManagementToolCreateBusinessPageRequests />}></Route>
+          <Route
+            path="/administrator-management-tool/create-category-requests"
+            element={<AdministratorManagementToolCreateCategoryRequests />}></Route>
+          <Route path="/administrator-management-tool/orders" element={<AdministratorManagementToolOrders />}></Route>
+          <Route path="/administrator-management-tool/stats" element={<AdministratorManagementToolStats />}></Route>
+          <Route
+            path="/administrator-management-tool/support-discussions"
+            element={<AdministratorManagementToolSupportDiscussions />}></Route>
+        </Route>
         <Route
           path="/business-management-tool"
           element={
