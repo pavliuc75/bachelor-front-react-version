@@ -16,6 +16,7 @@ interface Props {
   authorSlot?: any;
   dateSlot?: any;
   textSlot?: any;
+  className?: string;
 }
 
 function CComment(props: Props) {
@@ -30,6 +31,7 @@ function CComment(props: Props) {
     authorSlot,
     dateSlot,
     textSlot,
+    className = "",
   } = props;
 
   const [reply, setReply] = useState("");
@@ -70,12 +72,10 @@ function CComment(props: Props) {
   }
 
   return (
-    <div className="flex flex-col mt-7">
+    <div className={className + " flex flex-col mt-7"}>
       <div className="flex flex-row justify-space-between">
         <span className="block ml-4 font-bold c-text-14 mb-2">
-          {authorSlot ? (
-            authorSlot?.(messageObject.author)
-          ) : (
+          {authorSlot?.(messageObject.author) || (
             <Fragment>
               {messageObject.author?.email + ""}
               {messageObject.author?.isProductOwner ? " (" + t("owner") + ")" : ""}

@@ -275,7 +275,7 @@ export default {
   administrator: "Administrator",
   noMessages: "No messages",
   failedToLoadThreads: "Failed to load threads",
-  askedBy: "Asked by {author}",
+  askedBy: "Asked by {{author}}",
   noComments: "No comments",
   writeAComment: "Write a comment",
   typeANewComment: "Type a new comment",

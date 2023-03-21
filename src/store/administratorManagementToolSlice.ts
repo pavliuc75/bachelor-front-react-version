@@ -38,7 +38,7 @@ export interface State {
   ordersCurrentPage: number;
   ordersCurrentFilter: "ALL" | OrderStatus;
   threads: SupportThread[];
-  threadsTotalPages: number | undefined;
+  threadsTotalPages: number;
   threadsCurrentPage: number;
   generalStats: MarketplaceBusinessAnalytics | null;
   isGeneralStatsLoading: boolean;
@@ -88,7 +88,7 @@ export const administratorManagementToolSlice = createSlice({
       state.threads = action.payload;
     },
     setThreadsTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.threadsTotalPages = action.payload;
+      state.threadsTotalPages = action.payload || 1;
     },
     setThreadsCurrentPage: (state, action: PayloadAction<number>) => {
       state.threadsCurrentPage = action.payload;

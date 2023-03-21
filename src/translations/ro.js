@@ -274,7 +274,7 @@ export default {
   administrator: "Administrator",
   noMessages: "Fără mesaje",
   failedToLoadThreads: "Nu s-au încărcat firele",
-  askedBy: "Întrebat de {author}",
+  askedBy: "Întrebat de {{author}}",
   noComments: "Fără comentarii",
   writeAComment: "Scrieți un comentariu",
   typeANewComment: "Tastați un comentariu nou",
