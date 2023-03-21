@@ -25,7 +25,6 @@ function Account() {
     useState<SupportThread | null>(null);
 
   const cTextareaQuestionRef = useRef<any>(null);
-  const discussionWithAdministratorDialogRef = useRef<any>(null);
 
   const isBusinessManagementToolShown = keycloak?.realmAccess?.roles?.includes("BUSINESS_OWNER") || false;
   const isAdministratorManagementToolShown = keycloak?.realmAccess?.roles?.includes("ADMIN") || false;
@@ -64,7 +63,7 @@ function Account() {
       dispatch(createSupportThread(createNewSupportThreadRequest)).then((r) => {
         setIsStartNewDiscussionDialogShown(false);
         setDiscussionWithAdministratorDialogThreadInfo(r.data as SupportThread);
-        setTimeout(() => setIsStartNewDiscussionDialogShown(true), 0);
+        setDiscussionWithAdministratorDialogShown(true);
       });
     }
   }
@@ -182,7 +181,6 @@ function Account() {
           onUpdate={setNewDiscussionQuestion}></CTextarea>
       </CDialog>
       <DiscussionWithAdministratorDialog
-        ref={discussionWithAdministratorDialogRef}
         isDialogShown={discussionWithAdministratorDialogShown}
         onClose={() => setDiscussionWithAdministratorDialogShown(false)}
         discussionWithAdministratorDialogThreadInfo={
