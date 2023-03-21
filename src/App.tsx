@@ -24,6 +24,8 @@ import AdministratorManagementToolCreateCategoryRequests from "./pages/Administr
 import AdministratorManagementToolOrders from "./pages/AdministratorManagementToolOrders";
 import AdministratorManagementToolStats from "./pages/AdministratorManagementToolStats";
 import AdministratorManagementToolSupportDiscussions from "./pages/AdministratorManagementToolSupportDiscussions";
+import Categories from "./pages/Categories";
+import BusinessPages from "./pages/BusinessPages";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="/categories" element={<Categories />}></Route>
+        <Route path="/business-pages" element={<BusinessPages />}></Route>
         <Route
           path="administrator-management-tool"
           element={
