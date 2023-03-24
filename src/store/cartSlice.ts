@@ -4,6 +4,7 @@ import { hideLoadingOverlay, showLoadingOverlay, showSnackbar } from "./eventSli
 import { api } from "../service/apiClient";
 import i18n from "i18next";
 import { ProductInCart } from "../generated-sources/openapi";
+import keycloak from "../authentication/keycloak";
 
 export interface State {
   products: ProductInCart[] | undefined;
@@ -103,3 +104,16 @@ export const removeProductFromCart =
       })
       .finally(() => dispatch(hideLoadingOverlay()));
   };
+
+export const handleProductCartAction = (productId: string) => (dispatch: AppDispatch, state: () => RootState) => {
+  if (keycloak.authenticated) {
+    if (state().cart.products?.find((product) => product?.product?.id === productId)) {
+      dispatch(removeProductFromCart(productId, false));
+    } else {
+      dispatch(addProductToCart(productId));
+    }
+  } else {
+    // eslint-disable-next-line no-restricted-globals
+    keycloak.login({ redirectUri: process.env.REACT_APP_URL + location.pathname });
+  }
+};

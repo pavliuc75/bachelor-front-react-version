@@ -4,6 +4,8 @@ import { hideLoadingOverlay, showLoadingOverlay, showSnackbar } from "./eventSli
 import i18n from "i18next";
 import { api } from "../service/apiClient";
 import { Product } from "../generated-sources/openapi";
+import keycloak from "../authentication/keycloak";
+import { addProductToCart, removeProductFromCart } from "./cartSlice";
 
 export interface State {
   favorites: Product[] | undefined;
@@ -66,3 +68,16 @@ export const removeProductFromFavorites =
       })
       .finally(() => dispatch(hideLoadingOverlay()));
   };
+
+export const handleProductFavoriteAction = (productId: string) => (dispatch: AppDispatch, state: () => RootState) => {
+  if (keycloak.authenticated) {
+    if (state().favorites.favorites?.some((product) => product?.id === productId)) {
+      dispatch(removeProductFromFavorites(productId, false));
+    } else {
+      dispatch(addProductToFavorites(productId));
+    }
+  } else {
+    // eslint-disable-next-line no-restricted-globals
+    keycloak.login({ redirectUri: process.env.REACT_APP_URL + location.pathname });
+  }
+};

@@ -5,13 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
   directories: { name: string; route?: string }[];
+  className?: string;
 }
 
 function CPathRepresentation(props: Props) {
-  const { directories } = props;
+  const { directories, className = "" } = props;
 
   return (
-    <div className="flex flex-row items-center">
+    <div className={className + " flex flex-row items-center"}>
       {directories.map((directory, index) => {
         return (
           <div key={index} className="flex flex-row items-center">

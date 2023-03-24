@@ -26,6 +26,7 @@ import AdministratorManagementToolStats from "./pages/AdministratorManagementToo
 import AdministratorManagementToolSupportDiscussions from "./pages/AdministratorManagementToolSupportDiscussions";
 import Categories from "./pages/Categories";
 import BusinessPages from "./pages/BusinessPages";
+import BusinessPage from "./pages/BusinessPage";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         />
         <Route path="/categories" element={<Categories />}></Route>
         <Route path="/business-pages" element={<BusinessPages />}></Route>
+        <Route path="/business-page/:id" element={<BusinessPage />}></Route>
         <Route
           path="administrator-management-tool"
           element={

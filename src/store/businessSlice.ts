@@ -13,7 +13,7 @@ export interface State {
 
   businessProducts: Product[] | undefined;
   businessProductsCurrentPage: number;
-  totalBusinessProductsOnServer: number | undefined;
+  totalBusinessProductsOnServer: number;
   isBusinessProductsLoading: boolean;
 
   businessAnalytics: PublicBusinessAnalytics | undefined; //todo: vue ver has businessId
@@ -55,7 +55,7 @@ export const businessSlice = createSlice({
       state.businessProducts = action.payload;
     },
     setTotalBusinessProductsOnServer: (state, action: PayloadAction<number | undefined>) => {
-      state.totalBusinessProductsOnServer = action.payload;
+      state.totalBusinessProductsOnServer = action.payload || -1;
     },
     setBusinessPage: (state, action: PayloadAction<BusinessForPublicResponse>) => {
       state.businessPage = action.payload;
