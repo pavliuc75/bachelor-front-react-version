@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Base from "./pages/Base";
 import Account from "./pages/Account";
@@ -9,7 +9,7 @@ import keycloak from "./authentication/keycloak";
 import CLoadingOverlay from "./components/common/CLoadingOverlay";
 import CSnackbar from "./components/common/CSnackbar";
 import { useDispatch } from "react-redux";
-import { tryCreateSocialUser } from "./store/userSlice";
+import { fetchCurrentUserData, tryCreateSocialUser } from "./store/userSlice";
 import BusinessManagementTool from "./pages/BusinessManagementTool";
 import BusinessManagementToolEditBusinessPage from "./pages/BusinessManagementToolEditBusinessPage";
 import BusinessManagementToolProducts from "./pages/BusinessManagementToolProducts";
@@ -29,6 +29,7 @@ import BusinessPages from "./pages/BusinessPages";
 import BusinessPage from "./pages/BusinessPage";
 import Search from "./pages/Search";
 import Product from "./pages/Product";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -48,6 +49,14 @@ function App() {
           element={
             <RequireAuth>
               <CreateBusinessPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <RequireAuth>
+              <Cart />
             </RequireAuth>
           }
         />
@@ -103,6 +112,12 @@ function App() {
 }
 
 function Layout() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(fetchCurrentUserData());
+  }, []);
+
   return (
     <div className="flex flex-col min-h-[100vh] max-w-full relative" id="app-wrapper">
       <CLoadingOverlay></CLoadingOverlay>
