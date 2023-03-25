@@ -28,6 +28,7 @@ import Categories from "./pages/Categories";
 import BusinessPages from "./pages/BusinessPages";
 import BusinessPage from "./pages/BusinessPage";
 import Search from "./pages/Search";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="/search" element={<Search />}></Route>
         <Route path="/business-pages" element={<BusinessPages />}></Route>
         <Route path="/business-page/:id" element={<BusinessPage />}></Route>
+        <Route path="/product/:id" element={<Product />}></Route>
         <Route
           path="administrator-management-tool"
           element={

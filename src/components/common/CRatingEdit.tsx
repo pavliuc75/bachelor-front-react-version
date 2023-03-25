@@ -6,10 +6,11 @@ import "../../assets/styles/CRatingEdit.css";
 interface Props {
   value?: number;
   onUpdate?: (newValue: number) => void;
+  className?: string;
 }
 
 function CRatingEdit(props: Props) {
-  const { value = 0, onUpdate } = props;
+  const { value = 0, onUpdate, className = "" } = props;
   const [hoveredValue, setHoveredValue] = useState(-1);
 
   function handleChangeValue(newValue: number) {
@@ -17,7 +18,7 @@ function CRatingEdit(props: Props) {
   }
 
   return (
-    <div className="flex flex-col cursor-pointer">
+    <div className={className + " flex flex-col cursor-pointer"}>
       <div className="flex flex-row items-center justify-between">
         <FontAwesomeIcon
           icon={["fas", "star"]}
