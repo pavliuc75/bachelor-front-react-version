@@ -14,7 +14,7 @@ import CButtonPrimary from "../common/CButtonPrimary";
 
 interface Props {
   mode: "cart" | "favorite";
-  amount: number;
+  amount?: number;
   product?: Product;
 }
 
@@ -22,7 +22,7 @@ function ProductsListItem(props: Props) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const { mode, amount, product } = props;
+  const { mode, amount = 0, product } = props;
 
   const { products } = useSelector((state: RootState) => state.cart);
   const { favorites } = useSelector((state: RootState) => state.favorites);
