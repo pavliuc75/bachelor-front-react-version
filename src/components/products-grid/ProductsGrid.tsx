@@ -8,8 +8,8 @@ import { fetchCategories } from "../../store/productSlice";
 import CMenu from "../common/CMenu";
 import CButtonPrimary from "../common/CButtonPrimary";
 import CButtonSecondary from "../common/CButtonSecondary";
-import productsShelf from "./ProductsShelf";
 import ProductsShelf from "./ProductsShelf";
+import "../../assets/styles/ProductsGrid.scss";
 
 interface Props {
   className?: string;
@@ -18,10 +18,10 @@ interface Props {
   products: Product[];
   loading?: boolean;
   productsInTotal: number;
-  pathRepresentationSlot?: ReactNode;
+  children?: ReactNode;
   selectedSorting?: string;
   selectedStock?: boolean;
-  selectedCategories?: any[];
+  selectedCategories?: any;
   onCategorySelected?: (categories: any[]) => void;
   onStockSelected?: (newValue: boolean) => void;
   onSortingSelected?: (newValue: string) => void;
@@ -38,7 +38,7 @@ function ProductsGrid(props: Props) {
     products,
     loading = false,
     productsInTotal,
-    pathRepresentationSlot,
+    children,
     selectedSorting = "",
     selectedStock = true,
     selectedCategories = [],
@@ -62,13 +62,13 @@ function ProductsGrid(props: Props) {
 
   const stockOptions = [
     {
-      name: t("inStock"),
+      text: t("inStock"),
       value: true,
       selected: selectedStock,
       function: () => onStockSelected && onStockSelected(true),
     },
     {
-      name: t("outOfStock"),
+      text: t("outOfStock"),
       value: false,
       selected: !selectedStock,
       function: () => onStockSelected && onStockSelected(false),
@@ -78,7 +78,7 @@ function ProductsGrid(props: Props) {
   function getCategories() {
     return categories.map((category) => {
       return {
-        name: t(category.category || ""),
+        text: t(category.category || ""),
         selected: selectedCategories.includes(category.id),
         function: () => {
           if (selectedCategories.includes(category.id)) {
@@ -134,7 +134,7 @@ function ProductsGrid(props: Props) {
     ];
     return sortingOptions.map((option) => {
       return {
-        name: option.text,
+        text: option.text,
         selected: option.value === selectedSorting,
         function: () => onSortingSelected && onSortingSelected(option.value),
       };
@@ -162,11 +162,11 @@ function ProductsGrid(props: Props) {
   return (
     <>
       {!loading && (
-        <div className={"flex flex-col grow"}>
+        <div className={"flex flex-col grow"} data-css="ProductsGrid">
           {isToolBarShown && (
             <div className={"flex flex-col sticky top-0 bg-white"}>
               <div className="flex flex-row container self-center justify-between flex-wrap">
-                {pathRepresentationSlot}
+                {children}
                 <div className="flex flex-row gap-x-2.5 my-5 flex-wrap">
                   <div className="inline-block">
                     <CMenu isRadio={true} items={stockOptions}>
@@ -181,7 +181,7 @@ function ProductsGrid(props: Props) {
                     <div className={"inline-block"}>
                       <CMenu isCheckbox={true} items={getCategories()}>
                         <CButtonPrimary
-                          iconStart={!selectedCategories.length ? ["fas", "circle"] : undefined}
+                          iconStart={selectedCategories.length ? ["fas", "circle"] : undefined}
                           iconEnd={["fas", "chevron-down"]}
                           type="button"
                           text={t("category")}></CButtonPrimary>

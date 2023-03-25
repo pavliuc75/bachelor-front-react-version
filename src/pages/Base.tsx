@@ -1,78 +1,107 @@
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../store";
-import { showLoadingOverlay, showSnackbar } from "../store/eventSlice";
-import CButtonPrimary from "../components/common/CButtonPrimary";
-import CButtonSecondary from "../components/common/CButtonSecondary";
-import CTextarea from "../components/common/CTextarea";
-import { useRef, useState } from "react";
-import { validatorHelper } from "../utils/validatorHelper";
-import CComment from "../components/common/CComment";
-import CDialog from "../components/common/CDialog";
-import CFileInput from "../components/common/CFileInput";
-import CInput from "../components/common/CInput";
-import CMenu from "../components/common/CMenu";
-import CLoadingOverlay from "../components/common/CLoadingOverlay";
-import CPagination from "../components/common/CPagination";
-import CRating from "../components/common/CRating";
-import CRatingEdit from "../components/common/CRatingEdit";
+import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-//todo
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/productSlice";
+import { RootState } from "../store";
+import ProductsGrid from "../components/products-grid/ProductsGrid";
+import CPathRepresentation from "../components/common/CPathRepresentation";
 
 function Base() {
-  const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { t } = useTranslation();
-  const isSnackbarShown = useSelector((state: RootState) => state.event.snackbar.isShown);
+  const dispatch = useDispatch();
 
-  const [text, setText] = useState<string>("");
-  const cTextareaRef = useRef<any>(null);
+  const { categories, isProductsLoading, products, totalProductsOnServer } = useSelector(
+    (state: RootState) => state.product
+  );
 
-  const [isDialogShown, setIsDialogShown] = useState<boolean>(false);
-  const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
+  useEffect(() => {
+    dispatch(
+      // @ts-ignore
+      fetchProducts(
+        // @ts-ignore
+        searchParams.get("sorting") || "",
+        {
+          category: (getSelectedCategoriesProp() || []).length ? getSelectedCategoriesProp() : undefined,
+          inStock: searchParams.get("inStock") !== "false",
+        },
+        true,
+        false
+      )
+    );
+  }, [searchParams]);
 
-  function kek() {
-    console.log(cTextareaRef.current?.validateInput());
+  const cPathRepresentationData = [
+    {
+      route: "/categories",
+      name: t("categories") || "",
+    },
+    {
+      name: getCurrentCategory() || "",
+    },
+  ];
+
+  function getSelectedCategoriesProp() {
+    if (searchParams.getAll("categories")) {
+      if (Array.isArray(searchParams.getAll("categories"))) return searchParams.getAll("categories");
+      return [searchParams.getAll("categories")];
+    }
+    return [];
   }
 
-  function handleShowOverlay() {
-    dispatch(showLoadingOverlay({ isInstant: true }));
+  function getCurrentCategory() {
+    if ((getSelectedCategoriesProp() || []).length === 0) {
+      return t("allProducts");
+    } else if ((getSelectedCategoriesProp() || []).length === 1) {
+      // @ts-ignore
+      let result = categories.find((category) => category?.id === getSelectedCategoriesProp().at(0))?.category;
+      if (result) {
+        return t(result.toLowerCase());
+      }
+    }
+    return "";
   }
 
-  function handleShowMenu(e: { currentTarget: any }) {
-    console.log(e.currentTarget);
-    setIsMenuShown(true);
+  function updateQuery(name: string, item: any) {
+    setSearchParams({ ...searchParams, [name]: item });
+  }
+
+  function handleLoadMoreButtonClicked() {
+    dispatch(
+      // @ts-ignore
+      fetchProducts(
+        // @ts-ignore
+        searchParams.get("sorting") || "",
+        {
+          category: (getSelectedCategoriesProp() || []).length ? getSelectedCategoriesProp() : undefined,
+          inStock: searchParams.get("inStock") !== "false",
+        },
+        false,
+        true
+      )
+    );
   }
 
   return (
-    <div>
-      <h1>Base</h1>
-      {t("somethingWentWrongWhileUploadingTheFile", { count: 1 })}
-      {isSnackbarShown.toString()}
-      <button onClick={() => dispatch(showSnackbar({ message: "a", type: "a" }))}>Show Snackbar</button>
-      <br></br>
-      <CButtonPrimary onClick={() => kek()} iconStart={["fas", "coffee"]} text={"aa"}></CButtonPrimary>
-      <CButtonSecondary text={"aa"}></CButtonSecondary>
-      {text}
-      <CTextarea
-        ref={cTextareaRef}
-        value={text}
-        validatorFunctions={[validatorHelper.validateRequired]}
-        onUpdate={(newStr) => setText(newStr)}
-        labelText={"aaa"}></CTextarea>
-      {/*<Child slot1={(items: any) => <div>aaa {items.name}</div>} slot2={<div>bbb</div>}></Child>*/}
-      <CComment authorSlot={() => <div>kek</div>}></CComment>
-      <CDialog onUpdate={setIsDialogShown} isShown={isDialogShown}></CDialog>
-      <button onClick={() => setIsDialogShown(true)}>ds</button>
-      <CFileInput></CFileInput>
-      <CInput
-        onUpdate={function (value: string): void {
-          throw new Error("Function not implemented.");
-        }}></CInput>
-      <button onClick={handleShowOverlay}>show overlay</button>
-      <button onClick={handleShowMenu}>show menu</button>
-      <CPagination onCurrentPageChanged={() => {}} currentPage={3} totalPages={10}></CPagination>
-      <CRating value={3.5} totalRatings={5} isTotalRatingShown={true}></CRating>
-      <CRatingEdit value={3}></CRatingEdit>
+    <div className={"flex flex-col grow mb-16"}>
+      <ProductsGrid
+        loading={isProductsLoading}
+        onSortingSelected={(e) => updateQuery("sorting", e)}
+        onStockSelected={(e) => updateQuery("inStock", e)}
+        onCategorySelected={(e) => updateQuery("categories", e)}
+        selectedSorting={searchParams.get("sorting") || ""}
+        selectedStock={searchParams.get("inStock") !== "false"}
+        selectedCategories={getSelectedCategoriesProp()}
+        onLoadMore={handleLoadMoreButtonClicked}
+        products={products || []}
+        productsInTotal={totalProductsOnServer || 0}>
+        {categories.length && (
+          <CPathRepresentation
+            className={"self-start mt-3"}
+            directories={cPathRepresentationData}></CPathRepresentation>
+        )}
+      </ProductsGrid>
     </div>
   );
 }

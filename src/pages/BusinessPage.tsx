@@ -222,8 +222,9 @@ function BusinessPage() {
             onLoadMore={handleLoadMoreButtonClicked}
             products={businessProducts || []}
             loading={isBusinessProductsLoading}
-            productsInTotal={totalBusinessProductsOnServer}
-            pathRepresentationSlot={<div />}></ProductsGrid>
+            productsInTotal={totalBusinessProductsOnServer}>
+            <div></div>
+          </ProductsGrid>
         </div>
       )}
     </>

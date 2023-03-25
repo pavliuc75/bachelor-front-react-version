@@ -157,7 +157,7 @@ export const fetchProducts =
         dispatch(setProductsCurrentPage(state().product.productsCurrentPage + 1));
         dispatch(setTotalProductsOnServer(response.data.totalAmountOfElements));
       })
-      .catch((error) =>
+      .catch(() =>
         dispatch(
           showSnackbar({
             message: i18n.t("failedToLoadProducts"),
