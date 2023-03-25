@@ -1,14 +1,13 @@
 import { Order, OrderStatus } from "../generated-sources/openapi";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./index";
-import { setFavoritesLoading } from "./favoritesSlice";
 import { hideLoadingOverlay, showLoadingOverlay, showSnackbar } from "./eventSlice";
 import { api } from "../service/apiClient";
 import i18n from "i18next";
 
 export interface State {
   orders: Order[] | undefined;
-  ordersTotalPages: number | undefined;
+  ordersTotalPages: number;
   ordersCurrentPage: number;
   ordersCurrentFilter: "ALL" | OrderStatus | undefined;
 }
@@ -28,7 +27,7 @@ export const ordersSlice = createSlice({
       state.orders = action.payload;
     },
     setOrdersTotalPages: (state, action: PayloadAction<number | undefined>) => {
-      state.ordersTotalPages = action.payload;
+      state.ordersTotalPages = action.payload || 1;
     },
     setOrdersCurrentPage: (state, action: PayloadAction<number>) => {
       state.ordersCurrentPage = action.payload;

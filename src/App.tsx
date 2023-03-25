@@ -31,6 +31,7 @@ import Search from "./pages/Search";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -66,6 +67,14 @@ function App() {
           element={
             <RequireAuth>
               <Favorites />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <RequireAuth>
+              <Orders />
             </RequireAuth>
           }
         />
