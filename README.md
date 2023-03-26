@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+![alt text](https://examenautomoldova.files.wordpress.com/2023/03/logo.f19ef6ae.png?resize=100,53)
+# Bachelor Project's Front-end (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### The front-end part of the marketplace application made for the Chamber of Commerce of the Republic of Moldova
 
-## Available Scripts
+- Single-page application.
+- Build Using React and Typescript. There is also a [Vue.js version](https://github.com/pavliuc75/bachelor-front-vue-version).
 
-In the project directory, you can run:
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_.png?resize=300,184)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_-6.png?resize=300,184)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_-4.png?resize=300,184)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_-8.png?resize=300,184)&nbsp;&nbsp;&nbsp;
+<br></br>
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_iphone-12-pro.png?resize=106,230)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_iphone-12-pro-1.png?resize=106,230)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_iphone-12-pro-2.png?resize=106,230)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_iphone-12-pro-3.png?resize=106,230)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_iphone-12-pro-4.png?resize=106,230)&nbsp;&nbsp;&nbsp;
+![](https://examenautomoldova.files.wordpress.com/2023/03/localhost_8080_iphone-12-pro-5.png?resize=106,230)&nbsp;&nbsp;&nbsp;
+<br/><br/>
+<sub>*[Demo (video)](https://youtu.be/vpBMY7eRZJk)*</sub> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<sub>*[More screenshots](https://imgur.com/a/WH2Bemo)*</sub> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<sub>*[Figma file](https://www.figma.com/file/m7a77mPB9OUqQ2Ao66uAw9/bcr?node-id=0%3A1&t=NMkC1OgRlfTrw1RM-1)*</sub>
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<sub>*Other parts of this bachelor project: [Identity provider project (has html pages)](https://gitlab.com/bitstrive/bpr/identity-provider/-/tree/master/), [Backend project](https://gitlab.com/bitstrive/bpr/back-end)*</sub>
